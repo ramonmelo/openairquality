@@ -1,21 +1,24 @@
-
 #include "Arduino.h"
 
-#define LED 13
+#include "SensorTemp.cpp"
 
-void setup() 
+SensorTemp tempSensor(5, DHT22);
+
+void setup()
 {
-    pinMode(LED, OUTPUT);
-    Serial.begin(9600);
+    Serial.begin(9600); 
 }
 
 void loop()
 {
-    digitalWrite(LED, HIGH);
-    delay(500);
+    float temp;
+    float humidity;
 
-    Serial.write("teste");
+    tempSensor.info(temp, humidity);
 
-    digitalWrite(LED, LOW);
+    Serial.print(temp); Serial.println("*C\n");
+    Serial.print(humidity); Serial.println("%\n");
+    Serial.println("-----------------\n");
+
     delay(500);
 }
