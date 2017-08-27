@@ -8,8 +8,8 @@ class SensorTemp
         DHT_Unified sensor;
         long lastTime;
 
-        float lastTemp;
-        float lastHumidity;
+        int lastTemp;
+        int lastHumidity;
 
     public: 
         SensorTemp(uint8_t pin, uint8_t type) : sensor(pin, type) {
@@ -22,11 +22,11 @@ class SensorTemp
     
                 // Read temperature
                 sensor.temperature().getEvent(&event);
-                lastTemp = isnan(event.temperature) ? -1 : event.temperature;
+                lastTemp = isnan(event.temperature) ? -1 : int(event.temperature * 100);
                 
                 // Read relative humidity
                 sensor.humidity().getEvent(&event);
-                lastHumidity = isnan(event.relative_humidity) ? -1 : event.relative_humidity;
+                lastHumidity = isnan(event.relative_humidity) ? -1 : int(event.relative_humidity * 100);
 
                 lastTime = millis();
             }
