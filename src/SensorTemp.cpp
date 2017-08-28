@@ -16,7 +16,7 @@ class SensorTemp
             sensor.begin();
         }
 
-        void info(float &temperature, float &humidity) {
+        void info(int &temperature, int &humidity) {
             if ((millis() - lastTime) > 1000) {
                 sensors_event_t event;
     
